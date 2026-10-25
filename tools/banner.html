@@ -1,0 +1,42 @@
+<!doctype html>
+<!-- The org profile banner. Rendered by Playwright at 1280x400 (2x). -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&display=block">
+<style>
+  html, body { margin: 0; }
+  #card { position: relative; width: 1280px; height: 400px; overflow: hidden; color: #fff;
+    background: radial-gradient(120% 140% at 50% 0%, #2a1656 0%, #0d0820 60%); font-family: ui-rounded, "Segoe UI", system-ui, sans-serif; }
+  canvas { position: absolute; inset: 0; }
+  .roofs { position: absolute; left: 0; right: 0; bottom: 0; height: 120px; }
+  .copy { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+  h1 { margin: 0; font: 400 120px/0.9 Bangers, Impact, sans-serif; letter-spacing: 0.03em; transform: rotate(-3deg) skewX(-6deg);
+    -webkit-text-stroke: 8px #0b0618; paint-order: stroke fill; filter: drop-shadow(0 8px 0 #0b0618); }
+  h1 .a { color: #4ff3ff; text-shadow: 0 0 30px rgba(79, 243, 255, 0.7); }
+  h1 .b { color: #ffd23f; }
+  p { margin: 0; font-weight: 800; font-size: 22px; letter-spacing: 0.14em; text-transform: uppercase; color: #ffd9f6; text-shadow: 0 2px 0 #0b0618, 0 0 14px rgba(255, 79, 216, 0.7); }
+</style></head>
+<body><div id="card">
+  <canvas id="rain" width="1280" height="400"></canvas>
+  <svg class="roofs" viewBox="0 0 1280 120" preserveAspectRatio="none">
+    <rect fill="#07040f" x="0" y="72" width="1280" height="48"/>
+    <path fill="#07040f" d="M0 120V70h60V50h40v20h70V40l30-20 30 20v30h90V60h20V30h12v30h40v-10h80v20h60V45h50v25h90V35l40-25 40 25v35h70V55h30v15h80V40h16v30h60V60h90v10h50V50h40v70z"/>
+    <g fill="#ffd23f" opacity="0.8"><rect x="210" y="45" width="10" height="10"/><rect x="560" y="60" width="10" height="10"/><rect x="760" y="40" width="10" height="10"/><rect x="782" y="40" width="10" height="10"/><rect x="1110" y="62" width="10" height="10"/></g>
+    <g fill="#ff4fd8"><rect x="370" y="32" width="4" height="4"/><rect x="1015" y="44" width="4" height="4"/></g>
+  </svg>
+  <div class="copy">
+    <h1><span class="a">RAIN</span> <span class="b">ON ROOF</span></h1>
+    <p>Small games that hit hard · play in your browser</p>
+  </div>
+</div>
+<script>
+  const c = document.getElementById('rain').getContext('2d');
+  let s = 7;
+  const r = () => ((s = (s * 16807) % 2147483647) / 2147483647);
+  for (let i = 0; i < 260; i++) {
+    const x = r() * 1380 - 50, y = r() * 400, len = 10 + r() * 26, near = r() > 0.8;
+    c.strokeStyle = near ? 'rgba(200, 220, 255, 0.35)' : 'rgba(170, 180, 255, 0.18)';
+    c.lineWidth = near ? 2 : 1;
+    c.beginPath(); c.moveTo(x, y); c.lineTo(x - len * 0.2, y + len); c.stroke();
+  }
+  document.fonts.load('120px Bangers').then(() => (document.title = 'ready'));
+</script></body></html>
